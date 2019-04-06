@@ -22,24 +22,46 @@ $(document).ready(function () {
 		ctx.drawImage(img, 0, 0);
 	}
 
-	var tank1 = new Tank(tankGreen, 10, 10, 0, 100, 0, 10, 2, 0.2, 0);
+	var tank1 = new Tank(tankGreen, 10, 10, 0, 100, 10, 0);
 
+
+	$('body').keypress(function (e) {
+		if (e.key == 38) {
+			direction = 1;
+			if (tank.speed < tank.maxSpeed) {
+				tank.speed = 10;
+				tank.x += tank.speed
+			}
+		} else if (e.key == 40) {
+			direction = -1;
+			if (tank.speed < tank.maxSpeed) {
+				tank.speed += tank.boost;
+			}
+		} else if (e.key == 37) {
+			tank.rotate -= tank.angleSpeed;
+		} else if (e.key == 39) {
+			tank.rotate += tank.angleSpeed;
+		}
+
+
+
+
+	})
 
 	function loop() {
-		ctx.rotate(0);
-		ctx.translate(0, 0);
+
+
+
 		DrawMap(bacground, 0, 0);
-		//tank1.Draw();
+		tank1.Draw();
+		console.log("tic");
 
 	}
 
 	setInterval(function () {
-		ctx.clearRect(0, 0, 800, 480);
-		ctx.rotate(0);
-		ctx.translate(0, 0);
-		DrawMap(bacground, 0, 0);
+		loop();
 		//console.log("Tic")
 
-	}, 100)
+	}, 00)
 
 })
